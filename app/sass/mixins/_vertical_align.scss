@@ -1,0 +1,45 @@
+/// Align block to the middle of his parent
+///
+/// @name Vertical Align
+/// @group mixins
+/// @access public
+///
+/// @example scss - Usage
+///   .parent {
+///     [parent styles]
+///   }
+///
+///   .box1 {
+///     [box1 styles]
+///     @extend %vertical-align;
+///   }
+///   
+///   .box2 {
+///     [box2 styles]
+///     @extend %vertical-align;
+///   }
+///
+/// @example css - CSS output
+///   .parent {
+///     [parent styles]
+///   }
+///   
+///   .box1,
+///   .box2 {
+///     position: relative;
+///     top: 50%;
+///     transform: translateY(-50%);
+///   }
+///   
+///   .box1 {
+///     [box1 styles]
+///   }
+///   
+///   .box2 {
+///     @extend %vertical-align;
+///   }
+%vertical-align {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}

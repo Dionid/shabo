@@ -1,0 +1,24 @@
+// Private grid mixins
+
+// Blocks
+@mixin block($count) {
+  width: (($grid-width - ($grid-gutter-width * $count)) / $count / ($grid-width / 100)) * 1%;
+}
+
+// Columns
+@mixin column($count) {
+  width: (($grid-width - ($grid-gutter-width * ($count - 1))) / $count / ($grid-width / 100)) * 1%;
+}
+
+// Columns
+@mixin columns($factor, $count) {
+  width: ((($grid-width - ($grid-gutter-width * ($count - 1))) / $count / ($grid-width / 100)) * $factor) + (($grid-gutter-width / ($grid-width / 100)) * ($factor - 1)) * 1%;
+}
+
+@mixin column-push($count) {
+  left: ((($grid-width - ($grid-gutter-width * ($count - 1))) / $count / ($grid-width / 100)) + $grid-gutter-width/($grid-width/100)) * 1%;
+}
+
+@mixin columns-push($factor, $count) {
+  left: (((($grid-width - ($grid-gutter-width * ($count - 1))) / $count / ($grid-width / 100)) * $factor) + (($grid-gutter-width / ($grid-width / 100)) * ($factor - 1)) + $grid-gutter-width/($grid-width/100)) * 1%;
+}

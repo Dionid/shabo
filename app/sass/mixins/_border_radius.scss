@@ -1,0 +1,99 @@
+/// Mixin helping to set both radiuses of the top side of element simultaneously
+///
+/// @name Top border radius
+/// @group mixins
+/// @access public
+/// 
+/// @param {Length} $radius - Element's top side radiuses
+/// 
+/// @example scss - Usage
+///   .element {
+///     [some element styles]
+///     @include border-top-radius(5px);
+///   }
+///
+/// @example css - CSS output
+///   .element {
+///     [some element styles]
+///     border-top-left-radius: 5px;
+///     border-top-right-radius: 5px;
+///   }
+.border-top-radius($radius) {
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+}
+
+/// Mixin helping to set both radiuses of the right side of element simultaneously
+///
+/// @name Right border radius
+/// @group mixins
+/// @access public
+/// 
+/// @param {Length} $radius - Element's right side radiuses
+/// 
+/// @example scss - Usage
+///   .element {
+///     [some element styles]
+///     @include border-right-radius(5px);
+///   }
+///
+/// @example css - CSS output
+///   .element {
+///     [some element styles]
+///     border-bottom-right-radius: 5px;
+///     border-top-right-radius: 5px;
+///   }
+.border-right-radius($radius) {
+  border-bottom-right-radius: $radius;
+  border-top-right-radius: $radius;
+}
+
+/// Mixin helping to set both radiuses of the bottom side of element simultaneously
+///
+/// @name Bottom border radius
+/// @group mixins
+/// @access public
+/// 
+/// @param {Length} $radius - Element's bottom side radiuses
+/// 
+/// @example scss - Usage
+///   .element {
+///     [some element styles]
+///     @include border-bottom-radius(5px);
+///   }
+///
+/// @example css - CSS output
+///   .element {
+///     [some element styles]
+///     border-bottom-left-radius: 5px;
+///     border-bottom-right-radius: 5px;
+///   }
+.border-bottom-radius($radius) {
+  border-bottom-left-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+
+/// Mixin helping to set both radiuses of the left side of element simultaneously
+///
+/// @name Left border radius
+/// @group mixins
+/// @access public
+/// 
+/// @param {Length} $radius - Element's left side radiuses
+/// 
+/// @example scss - Usage
+///   .element {
+///     [some element styles]
+///     @include border-left-radius(5px);
+///   }
+///
+/// @example css - CSS output
+///   .element {
+///     [some element styles]
+///     border-bottom-left-radius: 5px;
+///     border-top-left-radius: 5px;
+///   }
+.border-left-radius($radius) {
+  border-bottom-left-radius: $radius;
+  border-top-left-radius: $radius;
+}

@@ -1,25 +1,2 @@
-# Ignore docs files
-html
-img
-lib
-tests
-tmp
-production
-/index.html
-css/font-awesome.min.css
-css/fonts
-css/webfont.css
-css/webfonts
-css/master.css
-less/master.less
-*.php
-
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+# Ignore compiled files
+dist/

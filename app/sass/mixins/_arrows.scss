@@ -1,0 +1,177 @@
+$arrow-default-color: #fff;
+
+/// Set the top arrow of element
+/// 
+/// @name Top arrow
+/// @group mixins
+/// @access public
+/// 
+/// @param {Color} $color [$arrow-default-color] - Arrow color
+/// @param {Length} $size [5px] - Arrow size
+/// @param {Length} $left [5px] - Left position of the arrow
+/// 
+/// @example scss - Usage
+///   .element {
+///     @include arrow-top(#369, 7px, 50px);
+///   }
+///   
+/// @example css - CSS output
+///   .element:after {
+///     position: absolute;
+///     bottom: 100%;
+///     left: 50px;
+///     width: 0;
+///     height: 0;
+///     border: solid transparent;
+///     border-width: 7px;
+///     border-bottom-color: #369;
+///     content: ' ';
+///     pointer-events: none;
+///   }
+@mixin arrow-top($color: $arrow-default-color, $size: 5px, $left: 5px) {
+  &:after {
+    position: absolute;
+    bottom: 100%;
+    left: $left;
+    width: 0;
+    height: 0;
+    border: solid transparent;
+    border-width: $size;
+    border-bottom-color: $color;
+    content: ' ';
+    
+    pointer-events: none;
+  }
+}
+
+/// Set the bottom arrow of element
+/// 
+/// @name Bottom arrow
+/// @group mixins
+/// @access public
+/// 
+/// @param {Color} $color [$arrow-default-color] - Arrow color
+/// @param {Length} $size [5px] - Arrow size
+/// @param {Length} $left [5px] - Left position of the arrow
+/// 
+/// @example scss - Usage
+///   .element {
+///     @include arrow-bottom(#369, 7px, 50px);
+///   }
+///   
+/// @example css - CSS output
+///   .element:after {
+///     position: absolute;
+///     top: 100%;
+///     left: 50px;
+///     width: 0;
+///     height: 0;
+///     border: solid transparent;
+///     border-width: 7px;
+///     border-bottom-color: #369;
+///     content: ' ';
+///     pointer-events: none;
+///   }
+@mixin arrow-bottom($color: $arrow-default-color, $size: 5px, $left: 5px) {
+  &:after {
+    position: absolute;
+    top: 100%;
+    left: $left;
+    width: 0;
+    height: 0;
+    border: solid transparent;
+    border-width: $size;
+    border-top-color: $color;
+    content: ' ';
+
+    pointer-events: none;
+  }
+}
+
+/// Set the left arrow of element
+/// 
+/// @name Left arrow
+/// @group mixins
+/// @access public
+/// 
+/// @param {Color} $color [$arrow-default-color] - Arrow color
+/// @param {Length} $size [5px] - Arrow size
+/// @param {Length} $top [5px] - Top position of the arrow
+/// 
+/// @example scss - Usage
+///   .element {
+///     @include arrow-left(#369, 7px, 50px);
+///   }
+///   
+/// @example css - CSS output
+///   .element:after {
+///     position: absolute;
+///     top: 50px;
+///     right: 100%;
+///     width: 0;
+///     height: 0;
+///     border: solid transparent;
+///     border-width: 7px;
+///     border-bottom-color: #369;
+///     content: ' ';
+///     pointer-events: none;
+///   }
+@mixin arrow-left($color: $arrow-default-color, $size: 5px, $top: 5px) {
+  &:after {
+    position: absolute;
+    top: $top;
+    right: 100%;
+    width: 0;
+    height: 0;
+    border: solid transparent;
+    border-width: $size;
+    border-right-color: $color;
+    content: ' ';
+
+    pointer-events: none;
+  }
+}
+
+/// Set the right arrow of element
+/// 
+/// @name Right arrow
+/// @group mixins
+/// @access public
+/// 
+/// @param {Color} $color [$arrow-default-color] - Arrow color
+/// @param {Length} $size [5px] - Arrow size
+/// @param {Length} $top [5px] - Top position of the arrow
+/// 
+/// @example scss - Usage
+///   .element {
+///     @include arrow-right(#369, 7px, 50px);
+///   }
+///   
+/// @example css - CSS output
+///   .element:after {
+///     position: absolute;
+///     top: 50px;
+///     left: 100%;
+///     width: 0;
+///     height: 0;
+///     border: solid transparent;
+///     border-width: 7px;
+///     border-bottom-color: #369;
+///     content: ' ';
+///     pointer-events: none;
+///   }
+@mixin arrow-right($color: $arrow-default-color, $size: 5px, $top: 5px) {
+  &:after {
+    position: absolute;
+    top: $top;
+    left: 100%;
+    width: 0;
+    height: 0;
+    border: solid transparent;
+    border-width: $size;
+    border-left-color: $color;
+    content: ' ';
+
+    pointer-events: none;
+  }
+}

@@ -1,0 +1,39 @@
+/// Clearfix placeholder selector
+///
+/// @name Clearfix
+/// @group mixins
+/// @access public
+/// @link http://blog.teamtreehouse.com/a-better-clearfix-with-sass
+/// 
+/// @example scss - Usage
+///   .wrap {
+///     [some wrap styles]
+///     @extend %clearfix;
+///   }
+///   .main-header {
+///     [some main-header styles]
+///     @extend %clearfix;
+///   }
+///
+/// @example css - CSS output
+///   .wrap,
+///   .main-header {
+///     clear: both;
+///     content: '';
+///     display: table;
+///   }
+///
+///   .wrap {
+///     [some wrap styles]
+///   }
+///
+///   .main-header {
+///     [some main-header styles]
+///   }
+%clearfix {
+  &:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+}

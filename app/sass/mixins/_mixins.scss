@@ -1,0 +1,14 @@
+// We should using sassdoc
+// @link http://sassdoc.com/
+
+// Variables should include earlier.
+// We shouldn't copy the mixins that can be generated using autoprefixer
+
+// Include all mixins inside mixins folder
+@import 'grid';
+@import 'buttons';
+@import 'clearfix';
+@import 'vertical_align';
+@import 'border_radius';
+@import 'retina_image';
+@import 'arrows';

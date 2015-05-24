@@ -1,0 +1,53 @@
+// Private buttons mixins
+
+@mixin make-color-btn($color, $color-dark, $color-text, $active-shadow: .5) {
+
+  color: rgba(red($color-text), green($color-text), blue($color-text), .9);
+  background: $color;
+
+  &:hover {
+    background: $color-dark;
+    color: rgba(red($color-text), green($color-text), blue($color-text), .6);
+  }
+
+  &.btn-active {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, $active-shadow) inset;
+  }
+
+  &.btn-active,
+  &.btn-disabled,
+  &.btn[disabled] {
+    background: $color-dark;
+    color: rgba(red($color-text), green($color-text), blue($color-text), .5);
+    
+    &:hover {
+      color: rgba(red($color-text), green($color-text), blue($color-text), .5);
+    }
+  }
+
+  &.btn-outline {
+    border-color: $color;
+    background: none;
+    color: $color;
+    
+    &:hover {
+      background: $color;
+      color: rgba(red($color-text), green($color-text), blue($color-text), .9);
+    }
+  }
+
+  &.btn-outline.btn[disabled],
+  &.btn-outline.btn-disabled {
+    border: 1px solid rgba(red($color), green($color), blue($color), .3);
+    background: none;
+    color: rgba(red($color), green($color), blue($color), .4);
+    box-shadow: none;
+  }
+  
+  &.btn-outline.btn-active {
+    border: 0;
+    background: none;
+    color: rgba(red($color), green($color), blue($color), .6);
+    box-shadow: 0 1px 3px rgba(red($color-dark), green($color-dark), blue($color-dark), .6) inset;
+  }
+}

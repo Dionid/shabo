@@ -1,0 +1,54 @@
+/// Mixin for displaying retina variant of image.
+/// Note that mixin assumes that retina files are always named with the '@2x' between the filename and the extension and these files must be in the same folder.
+/// For example, for file 'logo.png' retina file should have name 'logo@2x.png'.
+/// 
+/// @name Retina image
+/// @group mixins
+/// @access public
+/// 
+/// @param {String} $file - Image file name (without extension)
+/// @param {String} $type - Image extension
+/// @param {Length} $width [auto] - Width of retina image
+/// @param {Length} $height [auto] - Height of retina image
+/// 
+/// @example scss - Usage
+///   .logo {
+///     [some logo styles]
+///     @include retina-image('logo', 'png', 48px, 24px);
+///   }
+/// 
+/// @example css - CSS output
+///   .logo {
+///     [some logo styles]
+///     background-image: url('logo.png');
+///     @media only screen and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 1.3dppx) {
+///       background-image: url('logo@2x.png');
+///       background-size: 48px 24px;
+///     }
+///   }
+///   
+/// @example scss - Another usage
+///   .logo2 {
+///     [some second logo styles]
+///     @include retina-image('img/logo2', 'png');
+///   }
+/// 
+/// @example css - CSS output
+///   .logo2 {
+///     [some second logo styles]
+///     background-image: url('img/logo2.png');
+///     @media only screen and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 1.3dppx) {
+///       background-image: url('img/logo2@2x.png');
+///       background-size: auto auto;
+///     }
+///   }
+@mixin retina-image($file, $type, $width: auto, $height: auto) {
+  background-image: url($file + '.' + $type);
+  @media
+         only screen and (min-device-pixel-ratio: 1.3),
+         only screen and (min-resolution: 192dpi),
+         only screen and (min-resolution: 1.3dppx) {
+    background-image: url($file + '@2x.' + $type);
+    background-size: $width $height;
+  }
+}
