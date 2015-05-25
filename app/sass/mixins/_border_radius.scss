@@ -1,99 +1,80 @@
-/// Mixin helping to set both radiuses of the top side of element simultaneously
+/// Mixin helping to set specific side radiuses of element simultaneously.
+/// Can accept list of sides.
+/// If no passed sides then set radiuses for all sides.
 ///
-/// @name Top border radius
+/// @name Border radius
 /// @group mixins
-/// @access public
-/// 
-/// @param {Length} $radius - Element's top side radiuses
-/// 
-/// @example scss - Usage
+/// @acess public
+///
+/// @param {Length} $radius - Element's specific side radiuses
+/// @param {List | Side} $sides - Element's sides list which sets the radius
+///
+/// @example scss - Usage for all sides
 ///   .element {
 ///     [some element styles]
-///     @include border-top-radius(5px);
+///     @include border-radius(5px);
+///   }
+///
+/// @example css - CSS output
+///   .element {
+///     [some element styles]
+///     border-radius: 5px;
+///   }
+///
+/// @example scss - Usage for specific side
+///   .element {
+///     [some element styles]
+///     @include border-radius(5px, left);
 ///   }
 ///
 /// @example css - CSS output
 ///   .element {
 ///     [some element styles]
 ///     border-top-left-radius: 5px;
-///     border-top-right-radius: 5px;
-///   }
-.border-top-radius($radius) {
-  border-top-left-radius: $radius;
-  border-top-right-radius: $radius;
-}
-
-/// Mixin helping to set both radiuses of the right side of element simultaneously
-///
-/// @name Right border radius
-/// @group mixins
-/// @access public
-/// 
-/// @param {Length} $radius - Element's right side radiuses
-/// 
-/// @example scss - Usage
-///   .element {
-///     [some element styles]
-///     @include border-right-radius(5px);
-///   }
-///
-/// @example css - CSS output
-///   .element {
-///     [some element styles]
-///     border-bottom-right-radius: 5px;
-///     border-top-right-radius: 5px;
-///   }
-.border-right-radius($radius) {
-  border-bottom-right-radius: $radius;
-  border-top-right-radius: $radius;
-}
-
-/// Mixin helping to set both radiuses of the bottom side of element simultaneously
-///
-/// @name Bottom border radius
-/// @group mixins
-/// @access public
-/// 
-/// @param {Length} $radius - Element's bottom side radiuses
-/// 
-/// @example scss - Usage
-///   .element {
-///     [some element styles]
-///     @include border-bottom-radius(5px);
-///   }
-///
-/// @example css - CSS output
-///   .element {
-///     [some element styles]
 ///     border-bottom-left-radius: 5px;
-///     border-bottom-right-radius: 5px;
 ///   }
-.border-bottom-radius($radius) {
-  border-bottom-left-radius: $radius;
-  border-bottom-right-radius: $radius;
-}
-
-/// Mixin helping to set both radiuses of the left side of element simultaneously
-///
-/// @name Left border radius
-/// @group mixins
-/// @access public
-/// 
-/// @param {Length} $radius - Element's left side radiuses
-/// 
-/// @example scss - Usage
+///   
+/// @example scss - Usage for list of sides
 ///   .element {
 ///     [some element styles]
-///     @include border-left-radius(5px);
+///     @include border-radius(5px, left, top);
 ///   }
 ///
 /// @example css - CSS output
 ///   .element {
 ///     [some element styles]
-///     border-bottom-left-radius: 5px;
 ///     border-top-left-radius: 5px;
+///     border-bottom-left-radius: 5px;
+///     border-top-right-radius: 5px;
 ///   }
-.border-left-radius($radius) {
-  border-bottom-left-radius: $radius;
-  border-top-left-radius: $radius;
+@mixin border-radius($radius, $sides...) {
+  $setting-sides: ();
+
+  // Allowed sides: top, right, bottom, left
+  @each $side in $sides {
+    @if $side == top {
+      $setting-sides: append($setting-sides, border-top-left-radius);
+      $setting-sides: append($setting-sides, border-top-right-radius);
+    } @else if $side == right {
+      $setting-sides: append($setting-sides, border-top-right-radius);
+      $setting-sides: append($setting-sides, border-bottom-right-radius);
+    } @else if $side == bottom {
+      $setting-sides: append($setting-sides, border-bottom-right-radius);
+      $setting-sides: append($setting-sides, border-bottom-left-radius);
+    } @else if $side == left {
+      $setting-sides: append($setting-sides, border-top-left-radius);
+      $setting-sides: append($setting-sides, border-bottom-left-radius);
+    }
+  }
+
+  @if length($sides) == 0 {
+    // No specific sides, radius for all sides
+    $setting-sides: append($setting-sides, border-radius);
+  }
+
+  $setting-sides: remove-duplicates($setting-sides);
+
+  @each $side in $setting-sides {
+    #{$side}: $radius;
+  }
 }
