@@ -5,8 +5,11 @@ $font-family-controls: $font-family-base;
 $font-family-code: Menlo, Monaco, Consolas, "Courier New", monospace;
 
 // Grid
+$blocks-count: 6;
 $grid-width: 1000;
 $grid-gutter-width: 30;
+
+$arrow-color: #fff !default;
 
 // Base color
 $background-body: #fff;
@@ -120,8 +123,8 @@ $color-link: #134da5;
 $color-link-hover: $color-red;
 
 // Input & Button Padding
-$padding-input-base: .3em;
-$padding-btn-base: .55em;
+$padding-input-base: 0.3em;
+$padding-btn-base: 10;
 $padding-btn-side-base: 2.5em;
 $padding-btn-side-in-forms-base: 1.3em;
 
