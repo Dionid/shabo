@@ -3,11 +3,18 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 
 var config = {
+    htmlPath: 'app/html',
+    htmlDistPath: 'dist/html',
     sassPath: 'app/sass',
     cssPath: 'dist/css',
     coffeePath: 'app/coffee',
     jsPath: 'dist/js'
 };
+
+gulp.task('html', ['clean:html'], function() {
+    return gulp.src(config.htmlPath+'/**/*.html')
+        .pipe(gulp.dest(config.htmlDistPath));
+});
 
 gulp.task('sass', ['clean:css'], function() {
     return gulp.src(config.sassPath+'/**/*.scss')
@@ -35,6 +42,10 @@ gulp.task('coffee', ['clean:js'], function() {
 
 gulp.task('clean', require('del').bind(null, ['.tmp']));
 
+gulp.task('clean:html', require('del').bind(null, [
+    config.htmlDistPath+'/**.*'
+]));
+
 gulp.task('clean:css', require('del').bind(null, [
     config.cssPath+'/**.*'
 ]));
@@ -43,10 +54,12 @@ gulp.task('clean:js', require('del').bind(null, [
     config.jsPath+'/**.*'
 ]));
 
-gulp.task('watch', ['sass', 'coffee'], function () {
+gulp.task('watch', ['html', 'sass', 'coffee'], function () {
+    gulp.watch(config.htmlPath+'/**/*.html', ['html']);
     gulp.watch(config.sassPath+'/**/*.scss', ['sass']);
     gulp.watch(config.coffeePath+'/**/*.coffee', ['coffee']);
 });
 
-gulp.task('default', ['watch'], function() {
+gulp.task('default', ['clean'], function() {
+    gulp.start('watch');
 });
