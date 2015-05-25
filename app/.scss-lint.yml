@@ -4,3 +4,6 @@ linters:
   PropertySortOrder:
     order: smacss
     separate_groups: true
+
+  NestingDepth:
+    max_depth: 4
