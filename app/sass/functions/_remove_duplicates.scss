@@ -1,0 +1,40 @@
+/// Function for removing duplicates from the list.
+/// 
+/// @name Remove duplicates
+/// @group functions
+/// @access private
+/// 
+/// @param {List} $list - List in which need to remove duplicate elements.
+/// @param {Boolean} $recursive [false] - Should the function be executed recursively for all nested elements
+/// 
+/// @example scss - Usage without recursion
+///   $list: a, b, a, c, b, a, d, e;
+///   $remove-duplicates: remove-duplicates($list);
+///   
+/// @example scss - Result
+///   $remove-duplicates: a, b, c, d, e;
+///   
+/// @example scss - Usage recursively
+///   $list: (a, b, a), (a, b, a, c, b), (a, b, a, b);
+///   $remove-duplicates: remove-duplicates($list, true);
+///   
+/// @example scss - Result
+///   $remove-duplicates: (a, b), (a, b, c);
+@function remove-duplicates($list, $recursive: false) {
+  $result: ();
+  
+  @each $item in $list {
+    // Check if item already in result list only after removing duplicates in the item.
+    @if length($item) > 1 and $recursive {
+      $processed-item: remove-duplicates($item, $recursive);
+    } @else {
+      $processed-item: $item;
+    }
+
+    @if not index($result, $processed-item) {
+      $result: append($result, $processed-item);
+    }
+  }
+  
+  @return $result;
+}

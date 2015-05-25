@@ -1,0 +1,29 @@
+// http://hugogiraudel.com/2013/10/21/sass-debug/
+@function debug($list, $type: false, $root: true) {
+  $line-break: '\A ';
+  $result: if($type,
+    "(list:#{length($list)})[ "+ $line-break,
+    '[ ' + $line-break
+  );
+  $space: if($root, '', '  ');
+
+  @each $item in $list {
+    $result: $result + '  ';
+
+    @if length($item) > 1 {
+      $result: $result + debug($item, $type, false);
+    } @else {
+      $result: if($type,
+        $result + $space + '(' + type-of($item) + ') ' + $item,
+        $result + $space + $item
+      );
+    }
+
+    @if index($list, $item) != length($list) {
+      $result: $result + ', ' + $line-break;
+    }
+  }
+
+  $result: $result + $line-break + $space + ']';
+  @return quote($result);
+}
