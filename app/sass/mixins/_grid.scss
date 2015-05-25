@@ -1,4 +1,44 @@
 // Private grid mixins
+@mixin make-blocks() {
+  @for $i from 2 through $blocks-count {
+    .blocks {
+      @extend %clearfix;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+
+      > li {
+        float: left;
+      }
+
+      &.blocks-#{$i} {
+        > li {
+          @include blocks_list_item($i);
+        }
+      }
+
+      &.blocks-mobile-#{$i} {
+        @media only screen and (max-width: 767px) {
+          > li {
+            @include blocks_list_item($i);
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin blocks_list_item($count) {
+  width: (($grid-width - ($grid-gutter-width * ($count - 1))) / $count / ($grid-width / 100)) * 1%;
+  margin-left: $grid-gutter-width / ($grid-width / 100) * 1%;
+
+  // Clear for new rows
+  &:nth-child(#{$count}n + 1) {
+    margin-left: 0;
+    clear: left;
+  }
+}
 
 // Blocks
 @mixin block($count) {
