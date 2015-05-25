@@ -1,25 +1,27 @@
-$arrow-default-color: #fff;
-
-/// Set the top arrow of element
-/// 
-/// @name Top arrow
+/// Set the arrow of element.
+///
+/// @name Arrow
 /// @group mixins
 /// @access public
-/// 
-/// @param {Color} $color [$arrow-default-color] - Arrow color
+///
+/// @param {Side} $side - Arrow side (top, right, bottom, left)
+/// @param {Color} $color [$arrow-color] - Arrow color
+/// @see variables
 /// @param {Length} $size [5px] - Arrow size
-/// @param {Length} $left [5px] - Left position of the arrow
-/// 
-/// @example scss - Usage
-///   .element {
-///     @include arrow-top(#369, 7px, 50px);
+/// @param {Length} $offset [5px] - Offset position of the arrow.
+/// For the top and bottom arrows offset calculated from the top.
+/// Fot the left and right arrows offset calculated from the left.
+///
+/// @example scss - Usage with all paramaeters
+///   .top-arrow {
+///     @include arrow(top, #369, 7px, 15px);
 ///   }
-///   
+///
 /// @example css - CSS output
-///   .element:after {
+///   .top-arrow:after {
 ///     position: absolute;
 ///     bottom: 100%;
-///     left: 50px;
+///     left: 15px;
 ///     width: 0;
 ///     height: 0;
 ///     border: solid transparent;
@@ -28,150 +30,98 @@ $arrow-default-color: #fff;
 ///     content: ' ';
 ///     pointer-events: none;
 ///   }
-@mixin arrow-top($color: $arrow-default-color, $size: 5px, $left: 5px) {
-  &:after {
-    position: absolute;
-    bottom: 100%;
-    left: $left;
-    width: 0;
-    height: 0;
-    border: solid transparent;
-    border-width: $size;
-    border-bottom-color: $color;
-    content: ' ';
-    
-    pointer-events: none;
-  }
-}
-
-/// Set the bottom arrow of element
-/// 
-/// @name Bottom arrow
-/// @group mixins
-/// @access public
-/// 
-/// @param {Color} $color [$arrow-default-color] - Arrow color
-/// @param {Length} $size [5px] - Arrow size
-/// @param {Length} $left [5px] - Left position of the arrow
-/// 
-/// @example scss - Usage
-///   .element {
-///     @include arrow-bottom(#369, 7px, 50px);
+///
+/// @example scss - Usage with only two parameters
+///   .right-arrow {
+///     @include arrow(right, #F57);
 ///   }
-///   
+///
 /// @example css - CSS output
-///   .element:after {
+///   .right-arrow:after {
+///     position: absolute;
+///     left: 100%;
+///     top: 5px;
+///     width: 0;
+///     height: 0;
+///     border: solid transparent;
+///     border-width: 5px;
+///     border-bottom-color: #F57;
+///     content: ' ';
+///     pointer-events: none;
+///   }
+///
+/// @example scss - Usage with specific parameters
+///   .bottom-arrow {
+///     @include arrow($side: bottom, $offset: 20px, $color: #692);
+///   }
+///
+/// @example css - CSS output
+///   .bottom-arrow:after {
 ///     position: absolute;
 ///     top: 100%;
-///     left: 50px;
+///     left: 20px;
 ///     width: 0;
 ///     height: 0;
 ///     border: solid transparent;
-///     border-width: 7px;
-///     border-bottom-color: #369;
+///     border-width: 5px;
+///     border-bottom-color: #692;
 ///     content: ' ';
 ///     pointer-events: none;
 ///   }
-@mixin arrow-bottom($color: $arrow-default-color, $size: 5px, $left: 5px) {
-  &:after {
-    position: absolute;
-    top: 100%;
-    left: $left;
-    width: 0;
-    height: 0;
-    border: solid transparent;
-    border-width: $size;
-    border-top-color: $color;
-    content: ' ';
-
-    pointer-events: none;
-  }
-}
-
-/// Set the left arrow of element
-/// 
-/// @name Left arrow
-/// @group mixins
-/// @access public
-/// 
-/// @param {Color} $color [$arrow-default-color] - Arrow color
-/// @param {Length} $size [5px] - Arrow size
-/// @param {Length} $top [5px] - Top position of the arrow
-/// 
-/// @example scss - Usage
-///   .element {
-///     @include arrow-left(#369, 7px, 50px);
+///
+/// @example scss - Usage with only required parameter
+///   .left-arrow {
+///     @include arrow(left);
 ///   }
-///   
+///
 /// @example css - CSS output
-///   .element:after {
+///   .left-arrow:after {
 ///     position: absolute;
-///     top: 50px;
 ///     right: 100%;
+///     top: 5px;
 ///     width: 0;
 ///     height: 0;
 ///     border: solid transparent;
-///     border-width: 7px;
-///     border-bottom-color: #369;
+///     border-width: 5px;
+///     border-bottom-color: #fff;
 ///     content: ' ';
 ///     pointer-events: none;
 ///   }
-@mixin arrow-left($color: $arrow-default-color, $size: 5px, $top: 5px) {
-  &:after {
-    position: absolute;
-    top: $top;
-    right: 100%;
-    width: 0;
-    height: 0;
-    border: solid transparent;
-    border-width: $size;
-    border-right-color: $color;
-    content: ' ';
+@mixin arrow($side, $color: $arrow-color, $size: 5px, $offset: 5px) {
+  $status: true;
+  $side-property: '';
+  $offset-property: '';
 
-    pointer-events: none;
+  // Allowed sides: top, right, bottom, left
+  @if $side == top {
+    $side-property: bottom;
+    $offset-property: left;
+  } @else if $side == right {
+    $side-property: left;
+    $offset-property: top;
+  } @else if $side == bottom {
+    $side-property: top;
+    $offset-property: left;
+  } @else if $side == left {
+    $side-property: right;
+    $offset-property: top;
+  } @else {
+    $status: flase;
+    @warn "Side variable can accept one of the following values: top, right, bottom, left. Value passed: #{$side}";
   }
-}
 
-/// Set the right arrow of element
-/// 
-/// @name Right arrow
-/// @group mixins
-/// @access public
-/// 
-/// @param {Color} $color [$arrow-default-color] - Arrow color
-/// @param {Length} $size [5px] - Arrow size
-/// @param {Length} $top [5px] - Top position of the arrow
-/// 
-/// @example scss - Usage
-///   .element {
-///     @include arrow-right(#369, 7px, 50px);
-///   }
-///   
-/// @example css - CSS output
-///   .element:after {
-///     position: absolute;
-///     top: 50px;
-///     left: 100%;
-///     width: 0;
-///     height: 0;
-///     border: solid transparent;
-///     border-width: 7px;
-///     border-bottom-color: #369;
-///     content: ' ';
-///     pointer-events: none;
-///   }
-@mixin arrow-right($color: $arrow-default-color, $size: 5px, $top: 5px) {
-  &:after {
-    position: absolute;
-    top: $top;
-    left: 100%;
-    width: 0;
-    height: 0;
-    border: solid transparent;
-    border-width: $size;
-    border-left-color: $color;
-    content: ' ';
-
-    pointer-events: none;
+  @if $status == true and $side-property != '' and $offset-property != '' {
+    &:after {
+      position: absolute;
+      #{$side-property}: 100%;
+      #{$offset-property}: $offset;
+      width: 0;
+      height: 0;
+      border: solid transparent;
+      border-width: $size;
+      border-bottom-color: $color;
+      content: ' ';
+      pointer-events: none;
+    }
   }
 }
