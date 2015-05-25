@@ -1,18 +1,22 @@
+$light-text-color: #fff;
+$blocks-bg-color: #0064c2;
+$blocks-border-color: #000f21;
+
 .documentation {
   max-width: 1000px;
   margin: 0 auto;
+}
 
-  .blocks {
-    margin: 20px 0;
-  }
+.documentation .blocks {
+  margin: 20px 0;
 
-  .blocks > li {
+  > li {
     margin-top: 5px;
     padding: 10px 0;
+    border: 1px solid $blocks-border-color;
+    background-color: $blocks-bg-color;
+    color: $light-text-color;
     text-align: center;
-    background: #0064c2;
-    border: 1px solid #000f21;
-    color: white;
 
     &.blocks-item-big {
       padding: 40px 0;
