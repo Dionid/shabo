@@ -64,6 +64,8 @@
     } @else if $side == left {
       $setting-sides: append($setting-sides, border-top-left-radius);
       $setting-sides: append($setting-sides, border-bottom-left-radius);
+    } @else {
+      @warn "Side variable can accept one of the following values: top, right, bottom, left. Value passed: #{$side}";
     }
   }
 
