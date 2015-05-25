@@ -1,0 +1,21 @@
+.documentation {
+  max-width: 1000px;
+  margin: 0 auto;
+
+  .blocks {
+    margin: 20px 0;
+  }
+
+  .blocks > li {
+    margin-top: 5px;
+    padding: 10px 0;
+    text-align: center;
+    background: #0064c2;
+    border: 1px solid #000f21;
+    color: white;
+
+    &.blocks-item-big {
+      padding: 40px 0;
+    }
+  }
+}
