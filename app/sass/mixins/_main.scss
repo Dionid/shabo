@@ -5,6 +5,7 @@
 // We shouldn't copy the mixins that can be generated using autoprefixer
 
 // Include all mixins inside mixins folder
+@import 'responsive';
 @import 'bootstapping_grid';
 @import 'grid';
 @import 'buttons';

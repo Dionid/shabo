@@ -1,25 +1,4 @@
 @mixin make-units($preffix: '') {
-  .units-row {
-    @extend %clearfix;
-    position: relative;
-    margin: 0 0 $base-line;   
-  }
-
-  .unit {
-    position: relative;
-    // Prevent columns from collapsing when empty
-    min-height: 1px;
-    // Inner gutter via padding
-    padding-right: $grid-gutter-width / 2;
-    padding-left: $grid-gutter-width / 2;
-    float: left;
-
-    @media only screen and (max-width: 767px) {
-      width: 100%;
-      float: none;
-    }
-  }
-
   @include loop-units($preffix, width);
   @include loop-units($preffix, pull);
   @include loop-units($preffix, push);
@@ -36,28 +15,36 @@
   }
 }
 
+%float-left {
+  float: left;
+}
+
 // Preffix should be like '-mobile'
 @mixin calc-unit($unit, $type, $preffix: '', $name: $unit) {
   @if ($type == width) and ($unit > 0) {
     .unit#{$preffix}-#{$name} {
+      @extend %float-left;
       width: get-unit-width($unit);
     }
   }
 
   @if ($type == push) {
     .unit#{$preffix}-push-#{$name} {
+      @extend %float-left;
       left: get-unit-width($unit);
     }
   }
 
   @if ($type == pull) {
     .unit#{$preffix}-pull-#{$name} {
+      @extend %float-left;
       right: get-unit-width($unit);
     }
   }
 
   @if ($type == offset) {
     .unit#{$preffix}-offset-#{$name} {
+      @extend %float-left;
       margin-left: get-unit-width($unit);
     }
   }
