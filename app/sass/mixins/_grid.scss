@@ -1,14 +1,14 @@
 // Private grid mixins
 @mixin make-blocks() {
-  @for $i from 2 through $blocks-count {
-    .blocks {
-      @extend %clearfix;
-      position: relative;
-      margin: 0;
-      padding: 0;
-      
-      list-style-type: none;
+  .blocks {
+    @extend %clearfix;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    
+    list-style-type: none;
 
+    @for $i from 2 through $blocks-count {
       &.blocks-#{$i} {
         > li {
           @include blocks-list-item($i);
@@ -42,6 +42,31 @@
     margin-left: 0;
     clear: left;
   }
+}
+
+@mixin make-columns() {
+  .unit {
+    @extend %clearfix;
+    position: relative;
+
+    @each $unit in $units {
+      &.unit-#{$unit} {
+        @include column-item($unit);
+      }
+    }
+  }
+}
+
+@mixin column-item($unit) {
+  $gutter: grid-gutter-percentage($grid-width, $grid-gutter-width);
+
+  &:before {
+    content: debug($gutter);
+  }
+
+  float: left;
+  width: (100 - $gutter * (100 / $unit - 1)) / (100 / $unit);
+  margin-left: grid-gutter-percentage();
 }
 
 // Blocks
