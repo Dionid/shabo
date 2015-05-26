@@ -1,6 +1,8 @@
 $light-text-color: #fff;
-$blocks-bg-color: #0064c2;
-$blocks-border-color: #000f21;
+$blocks-bg-color: #fa6900;
+$blocks-border-color: #a7dbd8;
+$grid-bg-color: #0064c2;
+$grid-border-color: #000f21;
 
 .documentation {
   max-width: 1000px;
@@ -26,9 +28,10 @@ $blocks-border-color: #000f21;
 
 .documentation .unit {
   margin-top: 5px;
-  padding: 10px 0;
-  border: 1px solid $blocks-border-color;
-  background-color: $blocks-bg-color;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid $grid-border-color;
+  background-color: $grid-bg-color;
   color: $light-text-color;
   text-align: center;
 }

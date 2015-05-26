@@ -1,1 +1,5 @@
-@include make-units();
+@include make-units('-mobile');
+
+@media only screen and (min-width: 768px) {
+  @include make-units();
+};
