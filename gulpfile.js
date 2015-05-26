@@ -20,7 +20,7 @@ gulp.task('sass', ['clean:css'], function() {
     return gulp.src(config.sassPath+'/**/*.scss')
         .pipe($.sourcemaps.init())
         .pipe($.sass({
-            outputStyle: 'nested',
+            outputStyle: 'nested', // change to 'compressed' for production
             precision: 10,
             includePaths: ['.'],
             onError: console.error.bind(console, 'Sass error:')
