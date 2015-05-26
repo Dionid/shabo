@@ -1,4 +1,4 @@
-// Private grid mixins
+// BLOCKS
 @mixin make-blocks() {
   .blocks {
     @extend %clearfix;
@@ -11,7 +11,7 @@
     @for $i from 2 through $blocks-count {
       &.blocks-#{$i} {
         > li {
-          @include blocks-list-item($i);
+          @include block-item($i);
 
           @media only screen and (max-width: 767px) {
             width: 100%;
@@ -23,7 +23,7 @@
         @for $j from 2 through $blocks-count {
           &.blocks-mobile-#{$j} > li {
             @media only screen and (max-width: 767px) {
-              @include blocks-list-item($j);
+              @include block-item($j);
             }
           }
         }
@@ -32,43 +32,59 @@
   }
 }
 
-@mixin blocks-list-item($count) {
-  float: left;
-  width: (($grid-width - ($grid-gutter-width * ($count - 1))) / $count / ($grid-width / 100)) * 1%;
-  margin-left: $grid-gutter-width / ($grid-width / 100) * 1%;
+@mixin block-item($count) {
+  @include grid-item();
+  width: get-item-width($count);
 
-  // Clear for new rows
   &:nth-child(#{$count}n + 1) {
-    margin-left: 0;
-    clear: left;
+    @include clear-row();
   }
 }
 
-@mixin make-columns() {
-  .unit {
+// GRID
+@mixin make-units() {
+  .units-row {
     @extend %clearfix;
+    margin-bottom: $base-line;
+  }
+
+  .unit {
     position: relative;
 
     @each $unit in $units {
       &.unit-#{$unit} {
-        @include column-item($unit);
+        @include unit-item($unit);
+      }
+    }
+
+    @each $unit, $name in $units-names {
+      &.unit-#{$name} {
+        @include unit-item($unit);
       }
     }
   }
 }
 
-@mixin column-item($unit) {
-  $gutter: grid-gutter-percentage($grid-width, $grid-gutter-width);
+@mixin unit-item($unit) {
+  @include grid-item();
+  width: get-item-width(100/$unit);
 
-  &:before {
-    content: debug($gutter);
+  &:first-child {
+    @include clear-row();
   }
-
-  float: left;
-  width: (100 - $gutter * (100 / $unit - 1)) / (100 / $unit);
-  margin-left: grid-gutter-percentage();
 }
 
+@mixin grid-item {
+  margin-left: grid-gutter-percentage();
+  float: left;
+}
+
+@mixin clear-row {
+  margin-left: 0;
+  clear: left;
+}
+
+// OLD
 // Blocks
 @mixin block($count) {
   width: (($grid-width - ($grid-gutter-width * $count)) / $count / ($grid-width / 100)) * 1%;

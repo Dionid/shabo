@@ -23,3 +23,12 @@ $blocks-border-color: #000f21;
     }
   }
 }
+
+.documentation .unit {
+  margin-top: 5px;
+  padding: 10px 0;
+  border: 1px solid $blocks-border-color;
+  background-color: $blocks-bg-color;
+  color: $light-text-color;
+  text-align: center;
+}
