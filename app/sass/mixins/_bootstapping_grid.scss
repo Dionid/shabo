@@ -19,25 +19,19 @@
 @mixin calc-unit($unit, $type, $preffix: '', $name: $unit) {
   @if ($type == width) and ($unit > 0) {
     .unit#{$preffix}-#{$name} {
-      display: inline-block;
       width: get-unit-width($unit);
-      //float: left;
     }
   }
 
   @if ($type == push) {
     .unit#{$preffix}-push-#{$name} {
-      display: inline-block;
       left: get-unit-width($unit);
-      //float: left;
     }
   }
 
   @if ($type == pull) {
     .unit#{$preffix}-pull-#{$name} {
-      display: inline-block;
       right: get-unit-width($unit);
-      //float: left;
     }
   }
 
@@ -45,7 +39,6 @@
     .unit#{$preffix}-offset-#{$name} {
       display: inline-block;
       margin-left: get-unit-width($unit);
-      //float: left;
     }
   }
 }

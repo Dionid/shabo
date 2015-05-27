@@ -1,12 +1,13 @@
 .units-row {
-  //@extend %clearfix;
+  display: table; // Fixed webkit bug
   position: relative;
+  width: 100%; // Fixed webkit bug
   margin: 0 0 $base-line;
-  // Here we are. One single bad place in inline-block grid
-  letter-spacing: -.32em;
+  word-spacing: -.36em; // Remove whitespaces between units
 }
 
 .unit {
+  display: inline-block;
   position: relative;
   width: 100%;
   // Prevent columns from collapsing when empty
@@ -14,9 +15,7 @@
   // Inner gutter via padding
   padding-right: $grid-gutter-width / 2;
   padding-left: $grid-gutter-width / 2;
-  // Yep, we need set normal letter-spacing for each block
-  letter-spacing: normal;
-  //float: none;
+  word-spacing: normal; // Return word-spacing to normal state
 }
 
 @include make-units('-mobile');
