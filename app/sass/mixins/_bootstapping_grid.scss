@@ -15,37 +15,37 @@
   }
 }
 
-%float-left {
-  float: left;
-}
-
 // Preffix should be like '-mobile'
 @mixin calc-unit($unit, $type, $preffix: '', $name: $unit) {
   @if ($type == width) and ($unit > 0) {
     .unit#{$preffix}-#{$name} {
-      @extend %float-left;
+      display: inline-block;
       width: get-unit-width($unit);
+      //float: left;
     }
   }
 
   @if ($type == push) {
     .unit#{$preffix}-push-#{$name} {
-      @extend %float-left;
+      display: inline-block;
       left: get-unit-width($unit);
+      //float: left;
     }
   }
 
   @if ($type == pull) {
     .unit#{$preffix}-pull-#{$name} {
-      @extend %float-left;
+      display: inline-block;
       right: get-unit-width($unit);
+      //float: left;
     }
   }
 
   @if ($type == offset) {
     .unit#{$preffix}-offset-#{$name} {
-      @extend %float-left;
+      display: inline-block;
       margin-left: get-unit-width($unit);
+      //float: left;
     }
   }
 }

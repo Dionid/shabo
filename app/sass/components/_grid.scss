@@ -1,18 +1,22 @@
 .units-row {
-  @extend %clearfix;
+  //@extend %clearfix;
   position: relative;
-  margin: 0 0 $base-line;   
+  margin: 0 0 $base-line;
+  // Here we are. One single bad place in inline-block grid
+  letter-spacing: -.32em;
 }
 
 .unit {
   position: relative;
+  width: 100%;
   // Prevent columns from collapsing when empty
   min-height: 1px;
   // Inner gutter via padding
   padding-right: $grid-gutter-width / 2;
   padding-left: $grid-gutter-width / 2;
-  width: 100%;
-  float: none;
+  // Yep, we need set normal letter-spacing for each block
+  letter-spacing: normal;
+  //float: none;
 }
 
 @include make-units('-mobile');
