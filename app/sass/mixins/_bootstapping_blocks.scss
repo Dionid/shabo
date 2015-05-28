@@ -1,7 +1,67 @@
-@mixin make-blocks($preffix: '') {
+@mixin call-blocks-breakpoints() {
+  $list: blocks-list();
 
+  #{$list} {
+    @extend %clearfix;
+    position: relative;
+    margin: 0;
+    margin-right: $blosk-guttet-width/2;
+    margin-left: $blosk-guttet-width/2;
+    padding: 0;
+    float: left;
+
+    list-style-type: none;
+  }
+
+  @each $bp-name, $bp in $breakpoints {
+    @if (map-get($bp, 'from') > 0) {
+      @include respond-to($bp-name) {
+        @include make-blocks(map-get($bp, 'short'));
+      }
+    } @else {
+      @include make-blocks(map-get($bp, 'short'));
+    }
+  }
 }
 
-@mixin loop-blocks($preffix, $type) {
-  
+@mixin make-blocks($preffix: '') {
+  @for $i from 2 through $blocks-count {
+    .#{$fw-preffix}-b#{$preffix}-#{$i} {
+      @include block-item($i);
+    }
+  }
+}
+
+@mixin block-item($count-in-row) {
+  //width: get-block-width($count-in-row);
+  &:after {
+    content: get-block-width($count-in-row);
+  }
+
+  &:nth-child(#{$count-in-row}n - 1) {
+    margin-right: 0;
+  }
+
+  &:nth-child(#{$count-in-row}n + 1) {
+    margin-left: 0;
+  }
+}
+
+@function get-block-width($count-in-row) {
+  @return 35%;
+  //@return (100 - percentage($blosk-guttet-width) * ($count-in-row - 1)) / $count-in-row;
+}
+
+// sb-b-2, sb-bm-3 etc.
+@function blocks-list() {
+  $list: ();
+
+  @each $bp-name, $bp in $breakpoints {
+    $preffix: map-get($bp, 'short');
+    @for $i from 2 through $blocks-count {
+      $list: append($list, unquote(".#{$fw-preffix}-b#{$preffix}-#{$i}"), comma);
+    }
+  }
+
+  @return $list;
 }

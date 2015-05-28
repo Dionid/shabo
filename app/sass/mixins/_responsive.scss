@@ -2,12 +2,15 @@
 /// @link http://www.sitepoint.com/breakpoints-tweakpoints-sass/
 @mixin respond-to($breakpoint) {
   @if map-has-key($breakpoints, $breakpoint) {
-    @media (min-width: map-get($breakpoints, $breakpoint)) {
-      @content;
+    $i: map-get($breakpoints, $breakpoint);
+    @if map-has-key($i, 'from') {
+      @media (min-width: map-get($i, 'from')) {
+        @content;
+      }
+    } @else {
+      @warn 'Unfortunately, breakpoint array has wrong structure. Please, read documentation for fix this.';
     }
-  }
- 
-  @else {
+  } @else {
     @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
         + "Please make sure it is defined in `$breakpoints` map.";
   }
