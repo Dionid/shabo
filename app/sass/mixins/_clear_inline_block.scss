@@ -1,0 +1,13 @@
+%clear-inline-block-parent {
+  display: table; // Fixed webkit bug
+  position: relative;
+  width: 100%; // Fixed webkit bug
+  word-spacing: -.36em; // Remove whitespaces between units
+}
+
+%clear-inline-block-item {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  word-spacing: normal; // Return word-spacing to normal state
+}

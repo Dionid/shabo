@@ -4,23 +4,17 @@
   $list: unit-list();
   
   .units-row {
-    display: table; // Fixed webkit bug
-    position: relative;
-    width: 100%; // Fixed webkit bug
+    @extend %clear-inline-block-parent;
     margin: 0 0 $base-line;
-    word-spacing: -.36em; // Remove whitespaces between units
   }
 
   #{$list} {
-    display: inline-block;
-    position: relative;
-    width: 100%;
+    @extend %clear-inline-block-item;
     // Prevent columns from collapsing when empty
     min-height: 1px;
     // Inner gutter via padding
     padding-right: $grid-gutter-width / 2;
     padding-left: $grid-gutter-width / 2;
-    word-spacing: normal; // Return word-spacing to normal state
   }
 
   @each $bp-name, $bp in $breakpoints {

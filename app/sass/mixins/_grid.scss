@@ -1,130 +1,130 @@
-@mixin get-units-list() {
+// @mixin get-units-list() {
   
-}
+// }
 
-// BLOCKS
-@mixin make-blocks() {
-  .blocks {
-    @extend %clearfix;
-    position: relative;
-    margin: 0;
-    padding: 0;
-    
-    list-style-type: none;
-
-    @for $i from 2 through $blocks-count {
-      &.blocks-#{$i} {
-        > li {
-          @include block-item($i);
-
-          @media only screen and (max-width: 767px) {
-            width: 100%;
-            margin-left: 0;
-            float: none;
-          }
-        }
-
-        @for $j from 2 through $blocks-count {
-          &.blocks-mobile-#{$j} > li {
-            @media only screen and (max-width: 767px) {
-              @include block-item($j);
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-@mixin block-item($count) {
-  @include grid-item();
-  width: get-item-width($count);
-
-  &:nth-child(#{$count}n + 1) {
-    @include clear-row();
-  }
-}
-
-// GRID
-// @mixin make-units() {
-//   .units-row {
+// // BLOCKS
+// @mixin make-blocks() {
+//   .blocks {
 //     @extend %clearfix;
-//     margin-bottom: $base-line;
-//   }
-
-//   .unit {
 //     position: relative;
+//     margin: 0;
+//     padding: 0;
+    
+//     list-style-type: none;
 
-//     @each $unit in $units {
-//       &-#{$unit} {
-//         @include unit-item($unit);
-//       }
+//     @for $i from 2 through $blocks-count {
+//       &.blocks-#{$i} {
+//         > li {
+//           @include block-item($i);
 
-//       &-push-#{$unit} {
-//         @include push-grid-item($unit);
-//       }
-//     }
+//           @media only screen and (max-width: 767px) {
+//             width: 100%;
+//             margin-left: 0;
+//             float: none;
+//           }
+//         }
 
-//     @each $unit, $name in $units-names {
-//       &-#{$name} {
-//         @include unit-item($unit);
-//       }
-
-//       &-push-#{$name} {
-//         @include push-grid-item($unit);
+//         @for $j from 2 through $blocks-count {
+//           &.blocks-mobile-#{$j} > li {
+//             @media only screen and (max-width: 767px) {
+//               @include block-item($j);
+//             }
+//           }
+//         }
 //       }
 //     }
 //   }
 // }
 
-@mixin unit-item($unit) {
-  @include grid-item();
-  width: get-item-width(100/$unit);
+// @mixin block-item($count) {
+//   @include grid-item();
+//   width: get-item-width($count);
 
-  &:first-child {
-    @include clear-row();
-  }
-}
+//   &:nth-child(#{$count}n + 1) {
+//     @include clear-row();
+//   }
+// }
 
-@mixin push-grid-item($unit) {
-  $offset: get-item-width(100/$unit);
-  margin-left: 2*grid-gutter-percentage() + $offset;
+// // GRID
+// // @mixin make-units() {
+// //   .units-row {
+// //     @extend %clearfix;
+// //     margin-bottom: $base-line;
+// //   }
 
-  &:first-child {
-    margin-left: grid-gutter-percentage() + $offset;
-  }
-}
+// //   .unit {
+// //     position: relative;
 
-@mixin grid-item {
-  margin-left: grid-gutter-percentage();
-  float: left;
-}
+// //     @each $unit in $units {
+// //       &-#{$unit} {
+// //         @include unit-item($unit);
+// //       }
 
-@mixin clear-row {
-  margin-left: 0;
-  clear: left;
-}
+// //       &-push-#{$unit} {
+// //         @include push-grid-item($unit);
+// //       }
+// //     }
 
-// OLD
-// Blocks
-@mixin block($count) {
-  width: (($grid-width - ($grid-gutter-width * $count)) / $count / ($grid-width / 100)) * 1%;
-}
+// //     @each $unit, $name in $units-names {
+// //       &-#{$name} {
+// //         @include unit-item($unit);
+// //       }
 
-// Columns
-@mixin column($count) {
-  width: (($grid-width - ($grid-gutter-width * ($count - 1))) / $count / ($grid-width / 100)) * 1%;
-}
+// //       &-push-#{$name} {
+// //         @include push-grid-item($unit);
+// //       }
+// //     }
+// //   }
+// // }
 
-// Columns
-@mixin columns($factor, $count) {
-  width: ((($grid-width - ($grid-gutter-width * ($count - 1))) / $count / ($grid-width / 100)) * $factor) + (($grid-gutter-width / ($grid-width / 100)) * ($factor - 1)) * 1%;
-}
+// @mixin unit-item($unit) {
+//   @include grid-item();
+//   width: get-item-width(100/$unit);
 
-@mixin column-push($count) {
-  left: ((($grid-width - ($grid-gutter-width * ($count - 1))) / $count / ($grid-width / 100)) + $grid-gutter-width/($grid-width/100)) * 1%;
-}
+//   &:first-child {
+//     @include clear-row();
+//   }
+// }
 
-@mixin columns-push($factor, $count) {
-  left: (((($grid-width - ($grid-gutter-width * ($count - 1))) / $count / ($grid-width / 100)) * $factor) + (($grid-gutter-width / ($grid-width / 100)) * ($factor - 1)) + $grid-gutter-width/($grid-width/100)) * 1%;
-}
+// @mixin push-grid-item($unit) {
+//   $offset: get-item-width(100/$unit);
+//   margin-left: 2*grid-gutter-percentage() + $offset;
+
+//   &:first-child {
+//     margin-left: grid-gutter-percentage() + $offset;
+//   }
+// }
+
+// @mixin grid-item {
+//   margin-left: grid-gutter-percentage();
+//   float: left;
+// }
+
+// @mixin clear-row {
+//   margin-left: 0;
+//   clear: left;
+// }
+
+// // OLD
+// // Blocks
+// @mixin block($count) {
+//   width: (($grid-width - ($grid-gutter-width * $count)) / $count / ($grid-width / 100)) * 1%;
+// }
+
+// // Columns
+// @mixin column($count) {
+//   width: (($grid-width - ($grid-gutter-width * ($count - 1))) / $count / ($grid-width / 100)) * 1%;
+// }
+
+// // Columns
+// @mixin columns($factor, $count) {
+//   width: ((($grid-width - ($grid-gutter-width * ($count - 1))) / $count / ($grid-width / 100)) * $factor) + (($grid-gutter-width / ($grid-width / 100)) * ($factor - 1)) * 1%;
+// }
+
+// @mixin column-push($count) {
+//   left: ((($grid-width - ($grid-gutter-width * ($count - 1))) / $count / ($grid-width / 100)) + $grid-gutter-width/($grid-width/100)) * 1%;
+// }
+
+// @mixin columns-push($factor, $count) {
+//   left: (((($grid-width - ($grid-gutter-width * ($count - 1))) / $count / ($grid-width / 100)) * $factor) + (($grid-gutter-width / ($grid-width / 100)) * ($factor - 1)) + $grid-gutter-width/($grid-width/100)) * 1%;
+// }

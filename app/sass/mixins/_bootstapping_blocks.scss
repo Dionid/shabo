@@ -2,15 +2,17 @@
   $list: blocks-list();
 
   #{$list} {
-    @extend %clearfix;
-    position: relative;
+    @extend %clear-inline-block-parent;
     margin: 0;
     margin-right: $blosk-guttet-width/2;
     margin-left: $blosk-guttet-width/2;
     padding: 0;
-    float: left;
 
     list-style-type: none;
+
+    >li {
+      @extend %clear-inline-block-item;
+    }
   }
 
   @each $bp-name, $bp in $breakpoints {
@@ -33,23 +35,31 @@
 }
 
 @mixin block-item($count-in-row) {
-  //width: get-block-width($count-in-row);
-  &:after {
-    content: get-block-width($count-in-row);
-  }
+  width: get-block-width($count-in-row);
 
-  &:nth-child(#{$count-in-row}n - 1) {
+  $first-child: unquote("#{$count-in-row}n+1");
+  $last-child: unquote("#{$count-in-row}n-1");
+
+  &:nth-child(#{$last-child}) {
     margin-right: 0;
   }
 
-  &:nth-child(#{$count-in-row}n + 1) {
+  &:nth-child(#{$first-child}) {
     margin-left: 0;
   }
 }
 
 @function get-block-width($count-in-row) {
-  @return 35%;
-  //@return (100 - percentage($blosk-guttet-width) * ($count-in-row - 1)) / $count-in-row;
+  @return (100 - get-blocks-gutter-width() * ($count-in-row - 1)) / $count-in-row;
+}
+
+// In percentage
+@function get-blocks-gutter-width() {
+  @if unit($blosk-guttet-width) == '%' {
+    @return $blosk-guttet-width;
+  } @else {
+    @return percentage($blosk-guttet-width/$grid-width);
+  }
 }
 
 // sb-b-2, sb-bm-3 etc.
