@@ -1,53 +1,155 @@
-// Private buttons mixins
+/// TODO
+/// append button
+/// rounded button
+/// circle button
+/// btn group
+@mixin make-buttons() {
+  .btn {
+    @include make-color-btn($btn-bg-default, darken($btn-bg-default, 10%), $btn-bg-white);
+
+    &-outline {
+      @include make-outline-btn($btn-bg-default, darken($btn-bg-default, 10%), $btn-bg-white);
+    }
+  }
+}
 
 @mixin make-color-btn($color, $color-dark, $color-text, $active-shadow: .5) {
-
-  color: rgba(red($color-text), green($color-text), blue($color-text), .9);
-  background: $color;
-
-  &:hover {
-    background: $color-dark;
-    color: rgba(red($color-text), green($color-text), blue($color-text), .6);
-  }
-
-  &.btn-active {
-    box-shadow: 0 1px 4px rgba(0, 0, 0, $active-shadow) inset;
-  }
-
-  &.btn-active,
-  &.btn-disabled,
-  &.btn[disabled] {
-    background: $color-dark;
-    color: rgba(red($color-text), green($color-text), blue($color-text), .5);
-    
-    &:hover {
-      color: rgba(red($color-text), green($color-text), blue($color-text), .5);
-    }
-  }
-
-  &.btn-outline {
-    border-color: $color;
-    background: none;
-    color: $color;
-    
-    &:hover {
-      background: $color;
-      color: rgba(red($color-text), green($color-text), blue($color-text), .9);
-    }
-  }
-
-  &.btn-outline.btn[disabled],
-  &.btn-outline.btn-disabled {
-    border: 1px solid rgba(red($color), green($color), blue($color), .3);
-    background: none;
-    color: rgba(red($color), green($color), blue($color), .4);
-    box-shadow: none;
-  }
+  @extend %clear-button-style;
+  @include make-buttons-sizes();
+  @include make-rounded-buttons();
+  @include make-circle-buttons();
   
-  &.btn-outline.btn-active {
+  background: $color;
+  color: transparentize($color-text, .1);
+
+  $states: btn-states();
+  $active: btn-states('active');
+  $disabled: btn-states('disabled');
+
+  #{$states} {
+    background: $color-dark;
+    color: transparentize($color-text, .4);
+  }
+
+  #{$active} {
+    box-shadow: 0 .08em .16em rgba(0, 0, 0, $active-shadow) inset;
+  }
+
+  #{$disabled} {
+    cursor: text;
+  }
+}
+
+@mixin make-outline-btn($color, $color-dark, $color-text, $active-shadow: .5) {
+  @extend %clear-button-style;
+  @include make-buttons-sizes();
+  @include make-rounded-buttons();
+  @include make-circle-buttons();
+
+  background: none;
+  border: 1px solid $color;
+  color: $color;
+
+  $hover: btn-states('hover');
+  $active: btn-states('active');
+  $disabled: btn-states('disabled');
+
+  #{$hover} {
+    background: $color;
+    color: transparentize($color-text, .1);
+  }
+
+  #{$active} {
     border: 0;
     background: none;
-    color: rgba(red($color), green($color), blue($color), .6);
-    box-shadow: 0 1px 3px rgba(red($color-dark), green($color-dark), blue($color-dark), .6) inset;
+    color: transparentize($color, .4);
+    box-shadow: 0 .08em .16em transparentize($color-dark, .4) inset;
   }
+
+  #{$disabled} {
+    border: 1px solid transparentize($color, .7);
+    background: none;
+    color: transparentize($color, .4);
+    box-shadow: none; 
+  }
+}
+
+@mixin make-rounded-buttons() {
+  &.rounded {
+    border-radius: $btn-rounded-radius;
+  }
+}
+
+@mixin make-circle-buttons() {
+  // &.circle {
+  //   height: 0;
+  //   padding: 5% 0;
+  //   border-radius: 50%;
+  //   overflow: hidden;
+  // }
+}
+
+@mixin make-buttons-sizes() {
+  &.large {
+    font-size: $btn-font-large;
+  }
+
+  &.small {
+    font-size: $btn-font-small;
+  }
+
+  &.smaller {
+    font-size: $btn-font-smaller;
+  }
+}
+
+@function btn-states($state: '') {
+  $list: ();
+
+  @if ($state == 'hover' or $state == '') {
+    $list: append($list, unquote('&:hover'), comma);
+    $list: append($list, unquote('&.hover'), comma);
+  }
+
+  @if ($state == 'focus' or $state == '') {
+    $list: append($list, unquote('&:focus'), comma);
+    $list: append($list, unquote('&.focus'), comma);
+  }
+
+  @if ($state == 'active' or $state == '') {
+    $list: append($list, unquote('&:active'), comma);
+    $list: append($list, unquote('&.active'), comma);
+  }
+
+  @if ($state == 'disabled' or $state == '') {
+    $list: append($list, unquote('[disabled]'), comma);
+    $list: append($list, unquote('&:disabled'), comma);
+    $list: append($list, unquote('&.disabled'), comma);
+  }
+
+  @return $list;
+}
+
+// TODO
+// fonts
+%clear-button-style {
+  display: inline-block;
+  margin: 0;
+  padding: $btn-padding-vertical $btn-padding-horizontal;
+
+  border: 0;
+  border-radius: $btn-radius;
+  outline: none;
+  background: none;
+  
+  font-family: arial;
+  font-size: $btn-font-normal;
+  font-weight: normal;
+  line-height: $base-line;
+  text-align: center;
+  text-decoration: none;
+  
+  box-shadow: none;
+  cursor: pointer;
+  vertical-align: top;
 }
