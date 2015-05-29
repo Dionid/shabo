@@ -23,7 +23,9 @@ gulp.task('sass', ['clean:css'], function() {
             outputStyle: 'nested', // change to 'compressed' for production
             precision: 10,
             includePaths: ['.'],
-            onError: console.error.bind(console, 'Sass error:')
+            onError: function(err) {
+                return $.notify().write(err);
+            }
         }))
        .pipe($.postcss([
             require('autoprefixer-core')({browsers: ['last 1 version']})
