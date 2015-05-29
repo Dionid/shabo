@@ -1,34 +1,54 @@
 /// TODO
 /// append button
-/// rounded button
-/// circle button
-/// btn group
 @mixin make-buttons() {
-  .btn {
-    @include make-color-btn($btn-bg-default, darken($btn-bg-default, 10%), $btn-bg-white);
+  @include make-btn-groups();
 
-    &-outline {
-      @include make-outline-btn($btn-bg-default, darken($btn-bg-default, 10%), $btn-bg-white);
+  .btn {
+    @extend %clear-button-style;
+    @include make-btn($btn-bg-default, $btn-bg-white);
+    @include iterate-buttons();
+    @include make-buttons-sizes();
+    @include make-rounded-buttons();
+    @include make-circle-buttons();
+  }
+}
+
+@mixin iterate-buttons() {
+  @each $color-name, $params in $btn-colors {
+    @if (map-has-key($params, 'text-color') and map-has-key($params, 'background')) {
+      $background: map-get($params, 'background');
+      $text-color: map-get($params, 'text-color');
+      
+      @if (map-has-key($params, 'background-dark')) {
+        $background-dark: map-get($params, 'background-dark');
+      } @else {
+        $background-dark: darken($background, 10%);
+      }
+
+      @if (map-has-key($params, 'active-shadow')) {
+        $active-shadow: map-get($params, 'active-shadow');
+      } @else {
+        $active-shadow: .5;
+      }
+    }
+
+    &.btn-#{$color-name} {
+      @include make-btn($background, $text-color, $background-dark, $active-shadow);
     }
   }
 }
 
-@mixin make-color-btn($color, $color-dark, $color-text, $active-shadow: .5) {
-  @extend %clear-button-style;
-  @include make-buttons-sizes();
-  @include make-rounded-buttons();
-  @include make-circle-buttons();
-  
-  background: $color;
-  color: transparentize($color-text, .1);
+@mixin make-btn($background, $text-color, $background-dark: darken($background, 10%), $active-shadow: .5) {
+  background: $background;
+  color: transparentize($text-color, .1);
 
   $states: btn-states();
   $active: btn-states('active');
   $disabled: btn-states('disabled');
 
   #{$states} {
-    background: $color-dark;
-    color: transparentize($color-text, .4);
+    background: $background-dark;
+    color: transparentize($text-color, .4);
   }
 
   #{$active} {
@@ -38,39 +58,57 @@
   #{$disabled} {
     cursor: text;
   }
+
+  &.outline {
+    @include make-outline-btn($background, $text-color, $background-dark, $active-shadow);
+  }
 }
 
-@mixin make-outline-btn($color, $color-dark, $color-text, $active-shadow: .5) {
-  @extend %clear-button-style;
-  @include make-buttons-sizes();
-  @include make-rounded-buttons();
-  @include make-circle-buttons();
-
+@mixin make-outline-btn($background, $text-color, $background-dark: darken($background, 10%), $active-shadow: .5) {
   background: none;
-  border: 1px solid $color;
-  color: $color;
+  border: 1px solid $background;
+  color: $background;
 
   $hover: btn-states('hover');
   $active: btn-states('active');
   $disabled: btn-states('disabled');
 
   #{$hover} {
-    background: $color;
-    color: transparentize($color-text, .1);
+    background: $background;
+    color: transparentize($text-color, .1);
   }
 
   #{$active} {
     border: 0;
     background: none;
-    color: transparentize($color, .4);
-    box-shadow: 0 .08em .16em transparentize($color-dark, .4) inset;
+    color: transparentize($background, .4);
+    box-shadow: 0 .08em .16em transparentize($background-dark, .4) inset;
   }
 
   #{$disabled} {
-    border: 1px solid transparentize($color, .7);
+    border: 1px solid transparentize($background, .7);
     background: none;
-    color: transparentize($color, .4);
+    color: transparentize($background, .4);
     box-shadow: none; 
+  }
+}
+
+@mixin make-btn-groups() {
+  .btn-group > .btn,
+  .btn-group > .btn-outline {
+    float: left;
+
+    &:not(:first-child):not(:last-child) {
+      @include border-radius(0);
+    }
+
+    &:first-child {
+      @include border-radius(0, right);
+    }
+
+    &:last-child {
+      @include border-radius(0, left);
+    }
   }
 }
 
@@ -81,12 +119,14 @@
 }
 
 @mixin make-circle-buttons() {
-  // &.circle {
-  //   height: 0;
-  //   padding: 5% 0;
-  //   border-radius: 50%;
-  //   overflow: hidden;
-  // }
+  &.circle {
+    width: $btn-circle-size;
+    height: $btn-circle-size;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+    line-height: $btn-circle-size;
+  }
 }
 
 @mixin make-buttons-sizes() {
@@ -131,7 +171,7 @@
 }
 
 // TODO
-// fonts
+// fonts from typography
 %clear-button-style {
   display: inline-block;
   margin: 0;
