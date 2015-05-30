@@ -4,14 +4,13 @@
   #{$list} {
     @extend %clear-inline-block-parent;
     margin: 0;
-    margin-right: $blosk-guttet-width/2;
-    margin-left: $blosk-guttet-width/2;
     padding: 0;
-
+    
     list-style-type: none;
 
     >li {
       @extend %clear-inline-block-item;
+      margin: 0;
     }
   }
 
@@ -28,7 +27,7 @@
 
 @mixin make-blocks($preffix: '') {
   @for $i from 2 through $blocks-count {
-    .#{$fw-preffix}-b#{$preffix}-#{$i} {
+    .#{$fw-preffix}-b#{$preffix}-#{$i} >li {
       @include block-item($i);
     }
   }
@@ -38,14 +37,22 @@
   width: get-block-width($count-in-row);
 
   $first-child: unquote("#{$count-in-row}n+1");
-  $last-child: unquote("#{$count-in-row}n-1");
+  $last-child: unquote("#{$count-in-row}n");
 
   &:nth-child(#{$last-child}) {
     margin-right: 0;
   }
 
+  &:not(:nth-child(#{$last-child})) {
+    margin-right: $blosk-guttet-width/2;
+  }
+
   &:nth-child(#{$first-child}) {
     margin-left: 0;
+  }
+
+  &:not(:nth-child(#{$first-child})) {
+    margin-left: $blosk-guttet-width/2;
   }
 }
 
