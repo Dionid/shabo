@@ -94,6 +94,10 @@
 }
 
 @mixin make-btn-groups() {
+  .btn-group:after {
+    @extend %clearfix;
+  }
+
   .btn-group > .btn,
   .btn-group > .btn-outline {
     float: left;

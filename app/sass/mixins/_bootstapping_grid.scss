@@ -5,13 +5,14 @@
   
   .units-row {
     @extend %clear-inline-block-parent;
-    margin: 0 0 $base-line;
+    margin: 0;
   }
 
   #{$list} {
     @extend %clear-inline-block-item;
     // Prevent columns from collapsing when empty
     min-height: 1px;
+    margin: 0 0 $base-line;
     // Inner gutter via padding
     padding-right: $grid-gutter-width / 2;
     padding-left: $grid-gutter-width / 2;

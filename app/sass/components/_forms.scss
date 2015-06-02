@@ -1,0 +1,143 @@
+.form {
+  label {
+    margin-bottom: .5*$base-line;
+  }
+
+  label,
+  input,
+  textarea,
+  select {
+    display: block;
+  }
+}
+
+.form-inline {
+  label,
+  input,
+  textarea,
+  select {
+    display: inline-block;
+  }
+}
+
+.error,
+.success,
+.warning {
+  font-size: $font-size-small;
+  font-weight: normal;
+}
+
+.input-error {
+  border-color: $color-red;
+  box-shadow: 0 0 0 2px transparentize($color-red, .7) inset;
+}
+
+.input-success {
+  border-color: $color-green;
+  box-shadow: 0 0 0 2px transparentize($color-green, .7) inset;
+}
+
+.input-gray {
+  border-color: $color-gray-dark;
+  box-shadow: 0 0 0 2px transparentize($color-gray-dark, .7) inset;
+}
+
+input,
+textarea,
+select {
+  position: relative;
+  padding: $input-padding;
+  border: 1px solid $color-input-border;
+  border-radius: 0;
+  outline: none;
+  background: $color-white;
+  font-family: $font-family-controls;
+  font-size: 1em;
+  line-height: $base-line;
+  box-shadow: none;
+  z-index: 2;
+
+  &:focus {
+    border-color: $color-blue;
+    outline: none;
+    box-shadow: 0 0 0 2px transparentize($color-blue, .7) inset;
+  }
+}
+
+textarea,
+[multiple],
+[multiple="multiple"] {
+  width: 100%;
+}
+
+
+.input-search,
+[type="search"] {
+  margin-bottom: 0;
+  padding-right: .5em;
+  padding-left: .5em;
+  border-radius: 15px;
+}
+
+.input-big {
+  font-size: $font-size-big;
+}
+
+.input-small {
+  font-size: $font-size-small;
+}
+
+.input-smaller {
+  font-size: $font-size-smaller;
+}
+
+.input-groups {
+  display: table;
+
+  input {
+    width: 100%;
+  }
+
+  input,
+  .input-append,
+  .input-prepend,
+  .btn-append {
+    display: table-cell;
+  }
+
+  .input-append,
+  .input-prepend,
+  .btn-append {
+    width: 1%;
+    vertical-align: middle;
+  }
+
+  .input-append,
+  .input-prepend {
+    margin: 0;
+    padding: .45em .75em .15em;
+    border: 1px solid $color-input-append-border;
+    background: $color-input-append-background;
+    color: rgba(0, 0, 0, .6);
+    font-size: $font-size-small;
+    line-height: $base-line;
+    white-space: nowrap;
+  }
+
+  .input-prepend {
+    border-right: 0;
+  }
+
+  .input-append {
+    position: relative;
+    border-left: 0;
+    z-index: 1;
+  }
+
+  .btn-append .btn {
+    @include border-radius(0, 'left');
+
+    display: block;
+    height: auto;
+  }
+}
