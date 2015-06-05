@@ -1,0 +1,421 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    font-family: 'Roboto', 'Open-sans', sans-serif;
+}
+/* HTML5 display-role reset for older browsers */
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+a{
+	color: inherit;
+	text-decoration: none;
+}
+
+// VARIABLES
+
+$box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+$box-shadow-l: 0 1px 5px rgba(0, 0, 0, 0.15);
+
+$color-orange: #fec006;
+
+// DEFAULT
+
+body{
+	background-color: #F6f6f6;
+	font-size: 18px;
+	line-height: 1.618;
+	color: rgba(0,0,0,.87);
+}
+
+// WRAPPERS
+
+.content {
+	padding: 0 20px;
+	&.no-head{
+		padding: 40px 20px;
+	}
+}
+
+// PANELS - "листы" для наложения поверх информации, карточек, контроллеров
+
+.panel{
+	background-color: #ffffff;
+	box-shadow: $box-shadow-l;
+	border-radius: 5px;
+	a{
+		color: $color-blue;
+	}
+	.panel-head{
+		padding: 0;
+		border-radius: 0;
+		&.underline{
+			border-bottom: 1px solid #f0f0f0;
+		}
+		.panel-titel{
+			padding: 15px 20px;
+			display: inline-block;
+			float: left;
+		}
+		&-ctrl{
+			margin-right: 1em;
+			margin-left: 1em;
+			.panel-tabs{
+				float: left;
+				li{
+					display: inline-block;
+					float: left;
+					a{
+						padding: 17px 20px;
+						position: relative;
+  						display: block;
+						transition: 0.3s;
+						color: #000;
+					}
+					&.active{
+						color: $color-blue;
+						border-bottom: 2px $color-blue solid;
+						&:hover{
+							color: $color-blue;
+						}
+						a{
+							color: $color-blue;
+						}
+					}
+					&:hover{
+						color: $color-blue;
+					}
+				}
+			}
+			&-left{
+				float: left;
+			}
+			&-right{
+				float: right;
+			}
+		}
+		@extend %clearfix;
+	}
+	.panel-body{
+		padding: 20px;
+		width: 100%;
+		&-ctrl{
+			margin-top: 1.1em;
+			.left-ctrl{
+				float: left;
+			}
+			.right-ctrl{
+				float: right;
+			}
+			@extend %clearfix;
+		}
+		@extend %clearfix;
+	}
+	.panel-ctrl{
+		
+		.right-ctrl{
+			float: right;
+		}
+		&.outlined{
+			border-top: 1px #f8f8f8 solid;
+		}
+		.btn{
+			padding: 15px 30px;
+			border-radius: 0;
+			box-shadow: none;
+			&:last-child{
+				border-bottom-right-radius: 5px;
+			}
+			&:first-child{
+				border-bottom-left-radius: 5px;
+			}
+		}
+		@extend %clearfix;
+	}
+}
+
+// CARDS - графические элементы имеющие цвет заливки и содержащие в себе
+// минимальное количество целевой информации. Цветом передают статус.
+
+.card{
+	background-color: #ffffff;
+	border-radius: 3px;
+	box-shadow: $box-shadow-l;
+	word-spacing: 0;
+	&-statistic{
+	}
+	&-red, &-error, &-failed{
+		color: #fff;
+		background-color: $color-red;
+	}
+	&-purple{
+		color: #fff;
+		background-color: #9b26af;
+	}
+	&-blue, &-notice, &-pending{
+		color: #fff;
+		background-color: $color-blue;
+	}
+	&-orange, &-new{
+		color: #fff;
+		background-color: $color-orange;
+	}
+	.card-titel{
+		padding: 20px;
+		// Внутренний контент предполагает наличие маргинов, но не падингов
+		& * {
+			padding: 0 !important;
+		}
+	}
+	.card-body{
+		padding: 0 20px 20px 20px;
+		// Внутренний контент предполагает наличие маргинов, но не падингов
+		& * {
+			padding: 0 !important;
+		}
+	}
+}
+
+// BUTTONS
+
+.btn{
+	box-shadow: $box-shadow-l;
+	transition: 0.3s;
+	&:hover{
+		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+	}
+	&-orange{
+		background-color: $color-orange;
+		color: #fff;
+		&:hover{
+			background-color: lighten( $color-orange, 5% );
+			color: #fff;
+		}
+	}
+}
+
+.btn-flat{
+	border: 0;
+	background-color: #FFF;
+	color: #000;
+	&:hover{
+
+	}
+}
+
+.btn-flat{
+	border: 0;
+	background-color: #FFF;
+	color: #000;
+	&:hover{
+		color: $color-blue;
+		background-color: #F8F8F8;
+	}
+}
+
+.btn-white{
+	box-shadow: $box-shadow-l;
+	border: 0;
+	background-color: #FFF;
+	color: #000;
+	font-size: 18px !important;
+	// padding: 10px 30px;
+	transition: 0.3s;
+	&:hover{
+		background-color: #FFF;
+		color: #000;
+		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+	}
+	&-active{
+		&:hover{
+
+			&-blue{
+				background-color: $color-blue;
+				color: #fff;
+			}
+		}
+	}
+}
+
+// INPUT - класс отвечающий за поля, включающие inputs, textareas, selects
+// могут иметь иконку, быть карточками
+
+input, textarea, select{
+	border-radius: 3px;
+	color: #000;
+}
+
+.input{
+	&-wr{
+		// width: 100%;
+		// display: table;
+		display: inline-block;
+		.input{
+			&-content{
+				padding: 0 2em;
+				&-inline{
+					& * {
+						display: inline-block;
+					}
+				}
+			}
+			&-icon{
+				// max-width: 100px;
+			}
+			&-text{
+				color: $color-blue;
+			}
+			&-field{
+				// display: none;
+				// width: 100%;
+			}
+		}
+		&-row{
+			display: table;
+			position: relative;
+			width: 100%;
+			&> *{
+				// display: table-cell;
+				display: inline-block;
+			}
+			.input{
+				&-content{
+					// width: 100%;
+					width: 80%;
+				}
+				&-icon{
+					max-width: 75px;
+					// width: 100%;
+					width: 20%;
+				}
+			}
+			label{
+				// display: inline-block;
+			}
+		}
+		label,
+		input,
+		textarea,
+		select {
+			margin: 0;
+		}
+	}
+}
+
+// .width{
+// 	&-100{
+// 		width: 100% !important;
+// 	}
+// 	&-85{
+// 		width: 85% !important;
+// 	}
+// 	&-50{
+// 		width: 50% !important;
+// 	}
+// 	&-30{
+// 		width: 30% !important;
+// 	}
+// }
+
+// .input{
+// 	&-wr{
+// 		display: inline-block;
+// 		vertical-align: middle;
+// 		padding-left: 2em;
+// 		padding-right: 2em;
+// 		&-inline{
+// 			label,
+// 			  input,
+// 			  textarea,
+// 			  select {
+// 			    display: inline-block;
+// 			  }
+// 		}
+// 		&-row{
+// 			width: 78%;
+// 			.input-icon{
+// 				width: 20%;
+// 			}
+// 		}
+// 	}
+// 	&-icon{
+// 		max-width: 100px;
+// 		display: inline-block;
+// 	}
+	// &-text{
+	// 	color: $color-blue;
+	// }
+	// &-field{
+	// 	display: none;
+	// 	width: 100%;
+	// }
+// }
+
+
+
+// UTILITIES
+
+.clearfix{
+	clear: both;
+}
+
+.push-right{
+	float: right;
+}
+
+.push-left{
+	float: left;
+}
+
+.v-top{
+	vertical-align: top;
+}
+
+.v-mid{
+	vertical-align: middle;
+}
+
+.n-p{
+	padding: 0 !important;
+}
+
+.deactivated{
+	display: none !important;
+}
+
+strong{
+	font-weight: bold;
+}
+
+// TYPOGRAPHY
+
+p{
+	&:last-child{
+		margin-bottom: 20px;
+	}
+	// margin-bottom: 20px;
+}
+
+@import "_material_design_fonts.scss";

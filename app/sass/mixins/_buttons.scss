@@ -22,7 +22,7 @@
       @if (map-has-key($params, 'background-active')) {
         $background-active: map-get($params, 'background-active');
       } @else {
-        $background-active: darken($background, 10%);
+        $background-active: lighten($background, 5%);
       }
 
       @if (map-has-key($params, 'active-shadow')) {
@@ -38,9 +38,9 @@
   }
 }
 
-@mixin make-btn($background, $text-color, $background-active: darken($background, 10%), $active-shadow: .5) {
+@mixin make-btn($background, $text-color, $background-active: lighten($background, 10%), $active-shadow: .5) {
   background: $background;
-  color: transparentize($text-color, .1);
+  color: $text-color;
   box-shadow: $btn-shadow;
   transition: $btn-transition;
 
@@ -50,7 +50,7 @@
 
   #{$states} {
     background: $background-active;
-    color: transparentize($text-color, .4);
+    // color: transparentize($text-color, .4);
     box-shadow: $btn-shadow-hover;
   }
 
@@ -71,9 +71,9 @@
   }
 }
 
-@mixin make-flat-btn($background, $text-color, $background-active: darken($background, 10%), $active-shadow: .5) {
+@mixin make-flat-btn($background, $text-color, $background-active: lighten($background, 10%), $active-shadow: .5) {
   background: $background;
-  color: transparentize($text-color, .1);
+  // color: transparentize($text-color, .1);
   box-shadow: none;
 
   $states: btn-states();
@@ -82,7 +82,7 @@
 
   #{$states} {
     background: $background-active;
-    color: transparentize($text-color, .4);
+    // color: transparentize($text-color, .4);
     box-shadow: none;
   }
 
@@ -95,7 +95,7 @@
   }
 }
 
-@mixin make-outline-btn($background, $text-color, $background-active: darken($background, 10%), $active-shadow: .5) {
+@mixin make-outline-btn($background, $text-color, $background-active: lighten($background, 10%), $active-shadow: .5) {
   background: none;
   border: 1px solid $background;
   color: $background;

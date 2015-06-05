@@ -1,0 +1,24 @@
+{
+  "name": "shabo",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Dionid/shabo",
+  "authors": [
+    "Dionid <ditreyw@gmail.com>"
+  ],
+  "description": "Material design styleguide",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}
