@@ -62,6 +62,9 @@ select {
     outline: none;
     box-shadow: 0 0 0 2px transparentize($color-blue, .7) inset;
   }
+  &.no-border{
+    border: 0;
+  }
 }
 
 textarea,

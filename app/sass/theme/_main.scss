@@ -259,6 +259,64 @@ body{
 	}
 }
 
+// SEARCH
+
+.search{
+	width: 100%;
+	// background-color: #FFF;
+	font-size: 0;
+	&-head{
+		width: 100%;
+		// word-spacing: -0.36em;
+		overflow: hidden;
+		font-size: 18px;
+		.search-input{
+			// width: 90%;
+			// word-spacing: 0;
+			// width: 100%;
+			display: block;
+			overflow: hidden;
+  			border: 1px #fff solid;
+			.input{
+				width: 100%;
+				padding: 0.5em;
+				padding-left: 1em;
+				font-weight: bold;
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
+			}
+		}
+		.search-btn{
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+			// word-spacing: 0;
+			// width: 10%;
+			float: right;
+			padding: 0.5em 2em;
+			border-color: #f8f8f8;
+			background-color: #fff;
+			&.active{
+				// background-color: $color-blue;
+			}
+		}
+	}
+	&-body{
+		background-color: #FFF;
+		font-size: 18px;
+		overflow: hidden;
+		display: block;
+		padding: 20px;
+		&.collapsed{
+			display: none;
+		}
+	}
+}
+
+::-webkit-input-placeholder {color:#999;}
+::-moz-placeholder          {color:#999;}/* Firefox 19+ */
+:-moz-placeholder           {color:#999;}/* Firefox 18- */
+:-ms-input-placeholder      {color:#999;}
+
 // INPUT - класс отвечающий за поля, включающие inputs, textareas, selects
 // могут иметь иконку, быть карточками
 
